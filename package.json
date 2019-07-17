@@ -1,0 +1,11 @@
+{
+    "name": "nodejs-mango",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Ismael Ouedraogo",
+    "license": "ISC",
+    "description": "Web App built with express and Mango"
+}
