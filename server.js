@@ -32,6 +32,50 @@ app.get('/api/contacts/:id', (request, response) => {
 
 
 //POST method implementation
+app.post('/api/contacts', (request, response) => {
+    const contact = {
+        id: contacts.length + 1,
+        first_name: request.body.first_name,
+        last_name: request.body.last_name,
+        email: request.body.email
+    }
+    contacts.push(contact);
+    response.json(contact);
+});
+
+
+//PUT request for editing contacts
+app.put('/api/contacts/:id', (request, response) => {
+    const requestId = request.params.id;
+    let contact = contacts.filter(contact => {
+        return contact.id == requestId;
+    })[0];
+
+    const index = contacts.indexOf(contact);
+    const keys = Object.keys(request.body);
+    keys.forEach(key => {
+        contact[key] = request.body[key];
+    });
+    contacts[index] = contact;
+    response.json(contacts[index]);
+
+});
+
+
+//DELETE request to delete contact we do not want
+app.delete('/api/contacts/:id', (request, response) => {
+    const requestId = request.params.id;
+    let contact = contacts.filter(contact => {
+        return contact.id == requestId;
+    })[0];
+
+
+    const index = contacts.indexOf(contact);
+    contacts.splice(index, 1);
+    response.json({
+        message: 'user ' + requestId + ' deleted.'
+    });
+});
 
 
 const hostname = 'localhost';
