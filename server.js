@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 let contacts = require('./data');
-
+app.use(bodyParser.json)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
@@ -19,7 +19,7 @@ app.get('/api/contacts', (request, response) => {
 
 app.get('/api/contacts/:id', (request, response) => {
 
-    const requestId = request.params.id
+    const requestId = request.params.id;
 
     let contact = contacts.filter(contact => {
         return contact.id == requestId;
@@ -79,7 +79,7 @@ app.delete('/api/contacts/:id', (request, response) => {
 
 
 const hostname = 'localhost';
-const port = 3002;
+const port = 3001;
 
 app.listen(port, hostname, () => {
     console.log('server is listening at ' +
